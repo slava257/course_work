@@ -20,7 +20,7 @@ public class Employee {
     }
 
     public int getSalary() {
-        return salary;
+        return this.salary;
     }
 
     public int getDepartment() {
@@ -31,11 +31,11 @@ public class Employee {
         return id;
     }
 
-    public void setSalaryChange(int salary) {
+    public void setSalary(int salary) {
         this.salary = salary;
     }
 
-    public void setDepartmentChange(int department) {
+    public void setDepartment(int department) {
         this.department = department;
     }
 
