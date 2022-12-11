@@ -3,7 +3,6 @@ import java.util.Arrays;
 
 public class Main {
 
-
     //Посчитать сумму затрат на зарплаты в месяц.
 
     public static void printTheSalaryAmount(int salaryCosts) {
@@ -50,15 +49,15 @@ public class Main {
         System.out.println("среднее значение зарплат " + averageSalary);
     }
     public static float pintTheAverageValueSalary(Employee [] employees) {
-        Employee.count=0;
+        int count = 0;
         float salaryCosts2 = 0f;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null) {
                     salaryCosts2 += employees[i].getSalary();
-                    Employee.count++;
+                    count++;
                 }
             }
-        return salaryCosts2/Employee.count;
+        return salaryCosts2/count;
     }
 
     //6. Получить Ф. И. О. всех сотрудников (вывести в консоль).
@@ -84,50 +83,46 @@ public class Main {
     // 2. Получить в качестве параметра номер отдела (1–5) и найти (всего 6 методов):
      //       1. Сотрудника с минимальной зарплатой.
     public static void printMinimumSalaryDepartment(int minimumSalary ) {
-        System.out.println("сотрудника с минимальной зарплатой в отделе" + minimumSalary);
+        System.out.println("сотрудника с минимальной зарплатой в отделе " + minimumSalary);
     }
-    public static int  printTheMinimumSalaryDepartment(Employee[] employees) {
-        int minimumSalaryOfAnEmployee1 = employees[0].getSalary();
-        int minimumSalaryOfAnEmployee2 = employees[0].getDepartment();
-        minimumSalaryOfAnEmployee2 =1;
+    public static int  printTheMinimumSalaryDepartment(Employee[] employees,int department) {
+        int minimumSalaryOfAnDepartment = employees[0].getSalary();
         for (int salaryOfEachEmployee = 0; salaryOfEachEmployee < employees.length; salaryOfEachEmployee++) {
             if (employees[salaryOfEachEmployee] != null) {
-                if (minimumSalaryOfAnEmployee1 > employees[salaryOfEachEmployee].getSalary()&&minimumSalaryOfAnEmployee2 == employees[salaryOfEachEmployee].getDepartment()) {
-                    minimumSalaryOfAnEmployee1 = employees[salaryOfEachEmployee].getSalary();
-                    minimumSalaryOfAnEmployee2=minimumSalaryOfAnEmployee1;
+                if (minimumSalaryOfAnDepartment > employees[salaryOfEachEmployee].getSalary()&&department == employees[salaryOfEachEmployee].getDepartment()) {
+                    minimumSalaryOfAnDepartment = employees[salaryOfEachEmployee].getSalary();
+                }else if (department == employees[salaryOfEachEmployee].getDepartment()) {
+                    minimumSalaryOfAnDepartment = employees[salaryOfEachEmployee].getSalary();
+                    return  minimumSalaryOfAnDepartment;
                 }
             }
         }
-        return minimumSalaryOfAnEmployee2;
+        return minimumSalaryOfAnDepartment;
     }
     //2. Сотрудника с максимальной зарплатой.
     public static void printMaxSalaryDepartment(int MaxSalary ) {
         System.out.println("сотрудника с максимальной зарплатой в отделе " + MaxSalary);
     }
-    public static int printTheMaximumSalaryDepartment(Employee[] employees) {
-        int maximumSalaryOfAnEmployee1 = employees[0].getSalary();
-        int maximumSalaryOfAnEmployee2 = employees[0].getDepartment();
-        maximumSalaryOfAnEmployee2 = 1;
+    public static int printTheMaximumSalaryDepartment(Employee[] employees , int department) {
+        int maximumSalaryOfAnDepartment = employees[0].getSalary();
         for (int salaryOfEachEmployee = 0; salaryOfEachEmployee < employees.length; salaryOfEachEmployee++) {
             if (employees[salaryOfEachEmployee] != null) {
-                if (maximumSalaryOfAnEmployee1 < employees[salaryOfEachEmployee].getSalary()&&maximumSalaryOfAnEmployee2 == employees[salaryOfEachEmployee].getDepartment()) {
-                    maximumSalaryOfAnEmployee1 = employees[salaryOfEachEmployee].getSalary();
-                    maximumSalaryOfAnEmployee2=maximumSalaryOfAnEmployee1;
+                if (maximumSalaryOfAnDepartment < employees[salaryOfEachEmployee].getSalary()&&department == employees[salaryOfEachEmployee].getDepartment()) {
+                    maximumSalaryOfAnDepartment = employees[salaryOfEachEmployee].getSalary();
                 }
             }
         }
-        return maximumSalaryOfAnEmployee2;
+        return maximumSalaryOfAnDepartment;
     }
     //Сумму затрат на зарплату по отделу.
     public static void printDepartmentSalaryCosts(int salaryCosts ) {
         System.out.println("Сумму затрат на зарплату по отделу " + salaryCosts);
     }
-    public static int departmentSalaryCosts(Employee[] employees) {
-        int calculateTheSumOfTheDepartment = employees[0].getDepartment();
+    public static int departmentSalaryCosts(Employee[] employees,int department) {
         int salaryCosts = 0;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null) {
-                if (calculateTheSumOfTheDepartment == employees[i].getDepartment()) {
+                if (department == employees[i].getDepartment()) {
                     salaryCosts += employees[i].getSalary();
                 }
             }
@@ -138,25 +133,21 @@ public class Main {
     public static void printAverageSalaryOfTheDepartment(int averageSalary ) {
         System.out.println("Среднюю зарплату по отделу " + averageSalary);
     }
-    public static int averageSalaryOfTheDepartment(Employee [] employees) {
-        int department = employees[0].getDepartment();
-        department = 1;
-        Employee.count=0;
+    public static int averageSalaryOfTheDepartment(Employee [] employees, int department) {
+       int count = 0;
         int salaryCosts = 0;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null&&department == employees[i].getDepartment()) {
                     salaryCosts += employees[i].getSalary();
-                    Employee.count++;
+                   count++;
                 }
             }
-        return salaryCosts/Employee.count;
+        return salaryCosts/count;
     }
     //Проиндексировать зарплату всех сотрудников отдела на процент, который приходит в качестве параметра.
-    public static void printIndexTheSalaryOfDepartmentEmployees(Employee [] employees ) {
+    public static void printIndexTheSalaryOfDepartmentEmployees(Employee [] employees,int department ) {
         int indexing1 = 13;
         int salaryIndexing = 0;
-        int department = employees[0].getDepartment();
-        department = 1;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null && department == employees[i].getDepartment()) {
                 salaryIndexing = employees[i].getSalary() / 100 * indexing1;
@@ -175,24 +166,24 @@ public class Main {
     }
     //3. Получить в качестве параметра число и найти:
     //    1. Всех сотрудников с зарплатой меньше числа (вывести id, Ф. И. О. и зарплатой в консоль).
-    public static void printDataEmployeesWithASalaryLessThanSum(Employee[]employees) {
-        int sum = 65000;
+    public static void printDataEmployeesWithASalaryLessThanSum(Employee [] employees,int number) {
+
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i] != null && employees[i].getSalary() < sum) {
-                System.out.println(employees[i].getId() + " " + employees[i].getNameEmployee() + " " + employees[i].getSalary());
+            if (employees[i] != null &&  employees[i].getSalary()<number ) {
+                System.out.println("Всех сотрудников с зарплатой меньше числа "+employees[i].getId()+" "+employees[i].getNameEmployee()+" "+employees[i].getSalary());
+
             }
         }
     }
     //Всех сотрудников с зарплатой больше (или равно) числа (вывести id, Ф. И. О. зарплатой в консоль).
-    public static void  printDataEmployeesWithASalaryGreaterThanSum(Employee[]employees) {
-        int sum = 65000;
+    public static void printDataEmployeesWithASalaryGreaterThanSum(Employee [] employees,int number) {
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i] != null && employees[i].getSalary() >= sum) {
-                System.out.println(employees[i].getId()+" "+employees[i].getNameEmployee()+" "+employees[i].getSalary());
+            if (employees[i] != null &&employees[i].getSalary() >=number) {
+                System.out.println("Всех сотрудников с зарплатой больше "+employees[i].getId()+" "+employees[i].getNameEmployee()+" "+employees[i].getSalary());
             }
         }
     }
-    public static void main(String[] args) {
+            public static void main(String[] args) {
         //1. Создать класс Employee, который содержит информацию о Ф.И.О., отделе и зарплате сотрудника. Отделы для простоты должны быть названы от 1 до 5.
         //2. Добавить статическую переменную-счетчик, которая будет отвечать за id.
         //3. Добавить в класс Employee поле id, которое проставляется из счетчика, а затем счетчик увеличивает свое значение.
@@ -230,27 +221,31 @@ public class Main {
         printEmployee4(employees);
         //Проиндексировать зарплату (вызвать изменение зарплат у всех сотрудников на величину аргумента в %).
         index(employees);
+        int department = 1;
         // 2. Получить в качестве параметра номер отдела (1–5) и найти (всего 6 методов):
         //       1. Сотрудника с минимальной зарплатой.
-        int MinimumSalaryDepartment = printTheMinimumSalaryDepartment(employees);
+        int MinimumSalaryDepartment = printTheMinimumSalaryDepartment(employees,department);
         printMinimumSalaryDepartment(MinimumSalaryDepartment);
         //2. Сотрудника с максимальной зарплатой.
-        int MaximumSalaryDepartment = printTheMaximumSalaryDepartment(employees);
+        int MaximumSalaryDepartment = printTheMaximumSalaryDepartment(employees,department);
         printMaxSalaryDepartment(MaximumSalaryDepartment);
         //Сумму затрат на зарплату по отделу.
-        int departmentCosts =departmentSalaryCosts(employees);
+        int departmentCosts =departmentSalaryCosts(employees,department);
         printDepartmentSalaryCosts(departmentCosts);
         //Среднюю зарплату по отделу (учесть, что количество людей в отделе отличается от employees.length).
-        int averageSalaryDepartment=averageSalaryOfTheDepartment(employees);
+        int averageSalaryDepartment=averageSalaryOfTheDepartment(employees,department);
         printAverageSalaryOfTheDepartment(averageSalaryDepartment);
         //Проиндексировать зарплату всех сотрудников отдела на процент, который приходит в качестве параметра.
-        printIndexTheSalaryOfDepartmentEmployees(employees);
+        printIndexTheSalaryOfDepartmentEmployees(employees,department);
         //6. Напечатать всех сотрудников отдела (все данные, кроме отдела).
         printDataEmployees(employees);
+                System.out.println();
+        int number = 55000;
         //3. Получить в качестве параметра число и найти:
         //    1. Всех сотрудников с зарплатой меньше числа (вывести id, Ф. И. О. и зарплатой в консоль).
-        printDataEmployeesWithASalaryLessThanSum(employees);
+                printDataEmployeesWithASalaryLessThanSum(employees,number);
         //Всех сотрудников с зарплатой больше (или равно) числа (вывести id, Ф. И. О. и зарплатой в консоль).
-        printDataEmployeesWithASalaryGreaterThanSum(employees);
+        printDataEmployeesWithASalaryGreaterThanSum(employees,number);
+
     }
 }
